@@ -1,0 +1,329 @@
+:root {
+    /** Page and card colors. */
+    --page-background: #f8f9fa;
+    --card-background: #ffffff;
+    --card-shadow: rgba(0, 0, 0, 0.1);
+
+    /** Text colors. */
+    --text-primary: #212529;
+    --text-secondary: #6c757d;
+    --text-tertiary: #495057;
+    --text-link: #4f46e5;
+    --text-link-hover: #6366f1;
+
+    /** Input styles. */
+    --input-background: #ffffff;
+    --input-border: #ced4da;
+    --input-border-focus: #6366f1;
+    --input-checkbox-checked-bg: #4f46e5;
+    --input-checkbox-checked-border: #4f46e5;
+
+    /** Button gradients and shadows. */
+    --button-gradient: linear-gradient(135deg, #4f46e5, #3b82f6);
+    --button-gradient-hover: linear-gradient(135deg, #6366f1, #4f46e5);
+    --button-shadow: rgba(0, 0, 0, 0.2);
+
+    /** Divider styles. */
+    --divider-line: #dee2e6;
+    --divider-text: #6c757d;
+
+    /** Social button styles. */
+    --social-button-bg: #e9ecef;
+    --social-button-bg-hover: #dee2e6;
+    --social-button-text: #495057;
+}
+
+/** Override variables for dark mode. */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --page-background: #18181b;
+        --card-background: #27272a;
+        --card-shadow: rgba(0, 0, 0, 0.5);
+
+        --text-primary: #f4f4f5;
+        --text-secondary: #a1a1aa;
+        --text-tertiary: #d4d4d8;
+        --text-link: #818cf8;
+        --text-link-hover: #a5b4fc;
+
+        --input-background: #18181b;
+        --input-border: #3f3f46;
+        --input-border-focus: #6366f1;
+        --input-checkbox-checked-bg: #6366f1;
+        --input-checkbox-checked-border: #6366f1;
+
+        --button-gradient: linear-gradient(135deg, #6366f1, #3b82f6);
+        --button-gradient-hover: linear-gradient(135deg, #818cf8, #6366f1);
+        --button-shadow: rgba(0, 0, 0, 0.4);
+
+        --divider-line: #3f3f46;
+        --divider-text: #71717a;
+
+        --social-button-bg: #3f3f46;
+        --social-button-bg-hover: #52525b;
+        --social-button-text: #e4e7ea;
+    }
+}
+
+/** Base page styles. */
+html,
+body {
+    background: var(--page-background) !important;
+}
+
+body {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    min-height: 100vh !important;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial,
+    sans-serif !important;
+}
+
+/** Hide unnecessary subtitle. */
+.login-pf-page p.subtitle {
+    display: none !important;
+}
+
+/** Header styles. */
+.login-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-logo {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto 15px;
+}
+
+.login-title {
+    font-size: 33px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+/** Hide default Keycloak header elements. */
+.login-pf-page #kc-header,
+#kc-info,
+.kc-logo-text {
+    display: none !important;
+}
+
+/** Card styles. */
+.login-pf-page .card-pf {
+    background: var(--card-background) !important;
+    border-radius: 12px !important;
+    padding: 20px 48px 40px 48px !important;
+    border: none !important;
+    box-shadow: 0 6px 20px var(--card-shadow) !important;
+    max-width: 600px !important;
+    width: 100% !important;
+    margin: 0 !important;
+    text-align: left !important;
+}
+
+/** Heading styles. */
+.login-pf-page h1 {
+    font-size: 26px !important;
+    font-weight: 600 !important;
+    color: var(--text-primary) !important;
+    margin: 0 0 10px 0 !important;
+}
+
+/** Subtitle styles. */
+.login-pf-page .subtitle {
+    font-size: 14px !important;
+    color: var(--text-secondary) !important;
+    margin-bottom: 26px !important;
+    display: block !important;
+}
+
+/** Form input styles. */
+.login-pf-page form .form-group {
+    margin-bottom: 20px !important;
+}
+
+.login-pf-page form label.form-label {
+    color: var(--text-secondary) !important;
+    font-size: 14px !important;
+}
+
+.login-pf-page form input.form-control {
+    background-color: var(--input-background) !important;
+    border: 1.5px solid var(--input-border) !important;
+    color: var(--text-primary) !important;
+    border-radius: 8px !important;
+    padding: 13px 15px !important;
+    font-size: 15px !important;
+    transition: border 0.3s ease;
+}
+
+.login-pf-page form input.form-control:focus {
+    border: 1.5px solid var(--input-border-focus) !important;
+    outline: none !important;
+}
+
+/** Form options including checkbox and links. */
+.login-pf-page .form-options {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    font-size: 13px !important;
+    margin: 6px 0 18px 0 !important;
+}
+
+.login-pf-page .checkbox-wrapper {
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    cursor: pointer !important;
+}
+
+.login-pf-page .checkbox-wrapper input[type='checkbox'] {
+    appearance: none !important;
+    width: 16px !important;
+    height: 16px !important;
+    border: 1.5px solid var(--input-border) !important;
+    border-radius: 4px !important;
+    background-color: var(--input-background) !important;
+    position: relative;
+    display: inline-flex;
+    cursor: pointer !important;
+    transition: all 0.25s ease-in-out;
+    margin: 0;
+}
+
+.login-pf-page .checkbox-wrapper input[type='checkbox']:checked {
+    border: 1.5px solid var(--input-checkbox-checked-border) !important;
+    background-color: var(--input-checkbox-checked-bg) !important;
+}
+
+.login-pf-page .checkbox-wrapper input[type='checkbox']:checked::after {
+    content: '✔';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -55%);
+    font-size: 11px;
+    color: white;
+}
+
+.login-pf-page .checkbox-wrapper input[type='checkbox']:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.login-pf-page .checkbox-wrapper span {
+    color: var(--text-tertiary) !important;
+    cursor: pointer !important;
+    margin-right: 60px !important;
+}
+
+/** Forgot password link. */
+.login-pf-page .forgot-password-link {
+    color: var(--text-link) !important;
+    transition: color 0.25s ease;
+    display: inline-flex !important;
+    align-items: center !important;
+}
+
+.login-pf-page .forgot-password-link:hover {
+    color: var(--text-link-hover) !important;
+}
+
+/** Primary button styles. */
+.login-pf-page .btn-primary {
+    background: var(--button-gradient) !important;
+    color: white !important;
+    padding: 12px 18px !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    border: none !important;
+    width: 100% !important;
+    margin-top: 0 !important;
+    box-shadow: 0 2px 8px var(--button-shadow) !important;
+    transition: all 0.25s ease;
+    cursor: pointer;
+}
+
+.login-pf-page .btn-primary:hover {
+    background: var(--button-gradient-hover) !important;
+}
+
+/** Divider styles. */
+.login-pf-page .divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: var(--divider-text) !important;
+    margin: 18px 0 !important;
+    font-size: 13px !important;
+}
+
+.login-pf-page .divider::before,
+.login-pf-page .divider::after {
+    content: '' !important;
+    flex: 1;
+    border-bottom: 1px solid var(--divider-line);
+}
+
+.login-pf-page .divider:not(:empty)::before {
+    margin-right: 0.75em;
+}
+
+.login-pf-page .divider:not(:empty)::after {
+    margin-left: 0.75em;
+}
+
+/** Social button styles. */
+.login-pf-page .social-providers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.login-pf-page .social-btn {
+    padding: 10px;
+    background: var(--social-button-bg);
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--social-button-text);
+    transition: background 0.25s ease, transform 0.2s ease;
+}
+
+.login-pf-page .social-btn:hover {
+    background: var(--social-button-bg-hover);
+    transform: translateY(-2px);
+}
+
+.login-pf-page .social-btn i {
+    font-size: 18px;
+}
+
+/** Registration block under social buttons. */
+.login-pf-page .register-block {
+    margin-top: 14px;
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.login-pf-page .register-block .register-link {
+    color: var(--text-link);
+    margin-left: 4px;
+    text-decoration: none;
+    transition: color 0.25s ease;
+}
+
+.login-pf-page .register-block .register-link:hover {
+    color: var(--text-link-hover);
+}
