@@ -1,0 +1,245 @@
+:root {
+    --button-change-border-color: #d1d5db;
+    --avatar-bg-color: #f3f4f6;
+    --card-border-color: #f3f4f6;
+    --overlay-bg-color: #fdfdfe;
+    --input-bg-color: #fff;
+    --input-border-color: #d1d5db;
+    --input-focus-shadow-color: #d8e6fd;
+    --button-cansel-bg-color: #fff;
+    --button-cancel-text-color: #4b5563;
+    --button-cancel-hover-color: #f3f4f6;
+    --button-save-hover-color: #1d4ed8;
+}
+
+[data-theme='dark'] {
+    --button-change-border-color: #475569;
+    --avatar-bg-color: #334155;
+    --card-border-color: #334155;
+    --overlay-bg-color: #0c1327;
+    --input-bg-color: #0f172a;
+    --input-border-color: #374155;
+    --input-focus-shadow-color: #182c53;
+    --button-cansel-bg-color: #080e21;
+    --button-cancel-text-color: #9ca3af;
+    --button-cancel-hover-color: #1e293b;
+    --button-save-hover-color: #3b82f6;
+}
+
+.personalInfo {
+    display: flex;
+    flex-direction: column;
+    padding: 28px;
+    width: 85%;
+    gap: 21px;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+}
+
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+}
+
+.buttonChange {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    font-size: 14px;
+    border-radius: 8px;
+    border: 1px solid var(--button-change-border-color);
+    padding: 10px 16px;
+    cursor: pointer;
+}
+
+.avatar {
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid var(--avatar-bg-color);
+    box-shadow: 0 3px 10px 3px rgba(0, 0, 0, 0.05);
+}
+
+.changePhoto {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 65%;
+}
+
+.cardInfo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+    padding: 14px 0;
+}
+
+.border {
+    padding: 21px;
+    margin: 0 -21px;
+    border-top: 1px solid var(--card-border-color);
+    border-bottom: 1px solid var(--card-border-color);
+}
+
+.cardEmail {
+    display: flex;
+    flex-direction: column;
+    width: 65%;
+}
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    top: 50px;
+}
+
+.modal {
+    background: var(--overlay-bg-color);
+    border: 1px solid var(--card-border-color);
+    border-radius: 12px;
+    width: 400px;
+    padding: 24px;
+}
+
+.modalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 -24px;
+    padding: 0 16px 14px;
+    border-bottom: 1px solid var(--card-border-color);
+}
+
+.modalContent {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding-top: 21px;
+}
+
+.row {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.field {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    font-size: 14px;
+}
+
+.headerRow {
+    margin: 20px 0 10px;
+}
+
+
+.headerText {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-top: 1px solid var(--card-border-color);
+    padding-top: 16px;
+    color: #6b7280;
+}
+
+.field label {
+    color: var(--secondary-text-color);
+}
+
+.field input {
+    background: var(--input-bg-color);
+    border: 1px solid var(--input-border-color);
+    border-radius: 12px;
+    padding: 7px 10px;
+
+}
+
+.field input:focus {
+    transition: all 0.2s ease;
+    border: 1px solid #3b82f6;
+    outline: none;
+    box-shadow: 0 0 0 2px var(--input-focus-shadow-color);
+}
+
+.modalFooter {
+    display: flex;
+    justify-content: end;
+    gap: 10px;
+    margin: 0 -24px -24px;
+    padding: 14px 24px;
+    border-top: 1px solid var(--card-border-color);
+    background: var(--button-cansel-bg-color);
+    border-bottom-right-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+
+.cancelBtn {
+    background: var(--button-cansel-bg-color);
+    border: 0;
+    color: var(--button-cancel-text-color);
+    font-size: 13px;
+    transition: all 0.2s ease;
+    padding: 9px 14px;
+
+}
+
+.cancelBtn:hover {
+    background: var(--button-cancel-hover-color);
+    border-radius: 5px;
+}
+
+.cancelBtn:focus {
+    outline: none;
+}
+
+.saveBtn {
+    background: #2563eb;
+    border: none;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+    font-size: 13px;
+    padding: 9px 14px;
+    color: #fff;
+}
+
+.saveBtn:hover {
+    background: var(--button-save-hover-color);
+    color: #f5f9ff;
+}
+
+@media (max-width: 768px) {
+    .personalInfo {
+        width: 100%;
+        padding: 0 20px 20px;
+    }
+
+    .cardHeader {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .none {
+        display: none;
+    }
+
+    .modal {
+        width: 80%;
+        height: 80%;
+        overflow-y: scroll;
+    }
+}

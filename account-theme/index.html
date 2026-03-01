@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    </head>
+
+    <body>
+        <div id="root"></div>
+        <script type="module" src="/src/main.tsx"></script>
+    </body>
+    <script>
+        (function() {
+            var root = document.documentElement;
+            var mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
+            function apply(isDark) {
+                var t = isDark ? "dark" : "light";
+                root.setAttribute("data-theme", t);
+                if (isDark) root.classList.add('pf-v5-theme-dark');
+                else root.classList.remove('pf-v5-theme-dark');
+            }
+
+            // 1. При загрузке: приоритет localStorage
+            var saved = localStorage.getItem("theme");
+            apply(saved ? saved === "dark" : mediaQuery.matches);
+
+            // 2. Слушаем систему мгновенно (даже до загрузки React)
+            mediaQuery.addEventListener("change", function(e) {
+                // Если мы хотим, чтобы система ВСЕГДА переключала тему при изменении
+                apply(e.matches);
+                localStorage.setItem("theme", e.matches ? "dark" : "light");
+            });
+        })();
+    </script>
+</html>

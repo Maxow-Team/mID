@@ -1,0 +1,103 @@
+:root {
+    --shieldCheck-bg-color: #dbeafe;
+    --authState-bg-color: #dcfce7;
+    --authState-text-color: #15803d;
+}
+
+[data-theme='dark'] {
+    --shieldCheck-bg-color: #132247;
+    --authState-bg-color: #1b3637;
+    --authState-text-color: #4ade80;
+}
+
+.rec {
+    display: grid;
+    grid-template-areas:
+        "icon title  button"
+        "icon desc   button";
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto auto;
+    gap: 0 16px;
+    padding: 24px;
+    margin: 0 -24px;
+    border-top: 1px solid var(--card-border-color)
+}
+
+.entrance {
+    display: flex;
+    justify-content: space-between;
+    padding: 24px;
+    margin: 0 -24px;
+    border-top: 1px solid var(--card-border-color);
+    cursor: pointer;
+}
+
+.recContent {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.recContent div {
+    display: inline-flex;
+    flex-direction: column;
+}
+
+.authButton {
+    display: flex;
+    align-items: center;
+}
+
+.authState {
+    font-size: 12px;
+    color: var(--authState-text-color);
+    background-color: var(--authState-bg-color);
+    border-radius: 10px;
+    padding: 0 10px;
+}
+
+.recButton {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: var(--card-link-color);
+    padding: 10px 16px;
+    border-radius: 10px;
+    transition: all ease 0.2s;
+    cursor: pointer;
+}
+
+.entrance:hover .recChevron {
+    color: var(--card-link-hover-color);
+    background: none;
+}
+
+.recButton:hover {
+    color: var(--card-link-hover-color);
+    background-color: var(--card-link-hover-backcolor);
+}
+
+.shieldCheck {
+    justify-self: center;
+    align-self: center;
+    color: #2563eb;
+    background-color: var(--shieldCheck-bg-color);
+    padding: 10px 10px 5px;
+    border-radius: 20px;
+}
+
+@media (max-width: 768px) {
+    .rec {
+        display: grid;
+        grid-template-areas:
+        "icon title  button"
+        "desc desc   desc";
+        grid-template-columns: auto 1fr auto;
+        grid-template-rows: auto auto;
+        gap: 10px 16px;
+        padding: 24px;
+        margin: 0 -24px;
+        border-top: 1px solid var(--card-border-color)
+    }
+}
