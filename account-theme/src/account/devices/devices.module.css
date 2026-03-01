@@ -1,0 +1,93 @@
+:root {
+    --laptop-bg-color: #dcfce7;
+    --laptop-color: #16a34a;
+    --exitAll-text-color: #dc2626;
+    --exitAll-hover-bg-color: #fef2f2;
+    --icon-bg-color: #f3f4f6;
+    --icon-color: #4b5563;
+    --exit-text-color: #374151;
+    --exit-border-color: #d1d5db;
+}
+
+[data-theme='dark'] {
+    --laptop-bg-color: #1b3637;
+    --laptop-color: #4ade80;
+    --exitAll-text-color: #f87171;
+    --exitAll-hover-bg-color: #1b0b18;
+    --icon-bg-color: #334155;
+    --icon-color: #d1d5db;
+    --exit-text-color: #d1d5db;
+    --exit-border-color: #475569;
+}
+
+
+.laptop {
+    display: inline-flex;
+    align-self: flex-start;
+    padding: 12px;
+    color: var(--laptop-color);
+    background: var(--laptop-bg-color);
+    border-radius: 10px;
+}
+
+.online {
+    display: inline-flex;
+    align-self: flex-start;
+    color: var(--laptop-color);
+    background: var(--laptop-bg-color);
+    border-radius: 10px;
+    padding: 2px 10px;
+    font-size: 12px;
+}
+
+.ip {
+    padding-top: 16px;
+    margin-top: 16px;
+    border-top: 1px solid var(--card-border-color);
+    color: var(--secondary-text-color);
+    font-size: 12px;
+}
+
+.exitAll {
+    color: var(--exitAll-text-color);
+    cursor: pointer;
+    font-size: 14px;
+    padding: 10px 16px;
+    border-radius: 10px;
+    transition: all ease 0.3s;
+    text-align: end;
+}
+
+.exitAll:hover {
+    background-color:var(--exitAll-hover-bg-color);
+}
+
+.icon {
+    display: inline-flex;
+    align-self: center;
+    background-color: var(--icon-bg-color);
+    color: var(--icon-color);
+    padding: 12px;
+    border-radius: 10px;
+}
+
+.exit {
+    display: inline-flex;
+    align-self: center;
+    color: var(--exit-text-color);
+    padding: 10px 16px;
+    border: 1px solid var(--exit-border-color);
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.device {
+    flex-direction: row;
+    gap: 15px;
+}
+
+@media (max-width: 768px) {
+    .device {
+        gap: 5px;
+    }
+}

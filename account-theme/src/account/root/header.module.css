@@ -1,0 +1,186 @@
+:root {
+    --header-bg-color: #fdfdfe;
+    --header-border-color: #e5e7eb;
+    --header-card-bg-color: #fff;
+    --header-card-hover-bg-color: #f3f4f6;
+}
+
+[data-theme='dark'] {
+    --header-bg-color: #0c1327;
+    --header-border-color: #1e293b;
+    --header-card-bg-color: #0f172a;
+    --header-card-hover-bg-color: #1e293b;
+}
+
+.header {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 230px minmax(0,1000px) 1fr !important;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    flex-direction: row;
+    background-color: var(--header-bg-color);
+    border-bottom: 1px solid var(--header-border-color);
+    position: sticky !important;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    height: 30px !important;
+    display: block !important;
+}
+
+.avatar {
+    height: 40px !important;
+    object-fit: cover !important;
+    display: block !important;
+    border-radius: 40px !important;
+    border: 1px solid var(--header-border-color);
+}
+
+.headerLogo {
+    grid-column: 2;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: 14px;
+}
+
+.avatarWrapper {
+    position: relative;
+    grid-column: 3;
+    justify-self: end;
+}
+
+.headerAvatar {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    flex-direction: row;
+    gap: 10px;
+    border-radius: 30px;
+    padding: 7px 15px;
+    width: max-content;
+    margin-right: 14px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.headerName {
+    display: flex;
+    align-items: end;
+    flex-direction: column;
+    position: relative;
+}
+
+.headerAvatar:hover {
+    background-color: var(--header-card-hover-bg-color);
+}
+
+.headerWindow {
+    position: absolute;
+    right: 10px;
+    top: calc(100% + 12px);
+    background-color: var(--header-card-bg-color);
+    border: 1px solid var(--header-border-color);
+    border-radius: 15px;
+    z-index: 101;
+    display: flex;
+    flex-direction: column;
+    width: 170px;
+}
+
+.windowName {
+    display: flex;
+    flex-direction: column;
+    padding: 14px;
+    border-bottom: 1px solid var(--header-border-color);
+    font-size: 13px;
+    gap: 1px;
+}
+
+.windowButton {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 7px;
+    color: var(--secondary-text-color);
+    border-bottom: 1px solid var(--header-border-color);
+    cursor: pointer;
+}
+
+.windowButton div {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.sidebarWrapper {
+    display: none;
+}
+
+.sidebar {
+    width: 300px;
+    height: 100vh;
+    background-color: var(--bg-color);
+    color: var(--primary-text-color);
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-top: 20px;
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(-100%);
+    z-index: 1000;
+}
+
+.sidebarActive {
+    transform: translateX(0);
+}
+
+.sidebarHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px 10px;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s;
+}
+
+.overlayActive {
+    opacity: 1;
+    visibility: visible;
+}
+
+@media (max-width: 768px) {
+    .headerName {
+        display: none;
+    }
+
+    .sidebarWrapper {
+        display: flex;
+        padding: 10px 0 10px 20px;
+    }
+
+    .name {
+        display: none;
+    }
+
+    .logo {
+        height: 25px !important;
+    }
+}

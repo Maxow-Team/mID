@@ -1,0 +1,186 @@
+/**
+ * WARNING: Before modifying this file, run the following command:
+ *
+ * $ npx keycloakify own --path "account/root/PageNav.tsx"
+ *
+ * This file is provided by @keycloakify/keycloak-account-ui version 260502.0.2.
+ * It was copied into your repository by the postinstall script: `keycloakify sync-extensions`.
+ */
+
+/* eslint-disable */
+
+// @ts-nocheck
+
+import { useEnvironment } from "../../shared/keycloak-ui-shared";
+import {
+    Nav,
+    NavExpandable,
+    NavItem,
+    NavList,
+    PageSidebar,
+    PageSidebarBody,
+    Spinner
+} from "@patternfly/react-core/dist/esm/components";
+import {
+    PropsWithChildren,
+    MouseEvent as ReactMouseEvent,
+    Suspense,
+    useMemo,
+    useState
+} from "react";
+import { useTranslation } from "react-i18next";
+import { matchPath, useHref, useLinkClickHandler, useLocation } from "react-router-dom";
+
+import fetchContentJson from "../content/fetchContent";
+import { environment, type Environment, type Feature } from "../environment";
+import { TFuncKey } from "../i18n";
+import { usePromise } from "../utils/usePromise";
+
+type RootMenuItem = {
+    id?: string;
+    label: TFuncKey;
+    path: string;
+    isHeader?: boolean;
+    icon?: React.ReactNode;
+    isVisible?: keyof Feature;
+    modulePath?: string;
+};
+
+type MenuItemWithChildren = {
+    label: TFuncKey;
+    children: MenuItem[];
+    isVisible?: keyof Feature;
+};
+
+export type MenuItem = RootMenuItem | MenuItemWithChildren;
+
+export const PageNav = ({ onItemClick }: PageNavProps) => {
+    const [menuItems, setMenuItems] = useState<MenuItem[]>();
+    const context = useEnvironment<Environment>();
+
+    usePromise(signal => fetchContentJson({ signal, context }), setMenuItems);
+    return (
+        <PageSidebar>
+            <PageSidebarBody>
+                <Nav>
+                    <NavList>
+                        <Suspense fallback={<Spinner />}>
+                            {menuItems
+                                ?.filter(menuItem =>
+                                    menuItem.isVisible
+                                        ? context.environment.features[menuItem.isVisible]
+                                        : true
+                                )
+                                .map(menuItem => {
+                                    if ("isHeader" in menuItem) {
+                                        return (
+                                            <div key={menuItem.label} style={{
+                                                padding: '15px 20px 5px 20px',
+                                                color: 'gray',
+                                                fontSize: '12px',
+                                                textTransform: 'uppercase',
+                                                fontWeight: 'bold'
+                                            }}>
+                                                {menuItem.label}
+                                            </div>
+                                        )
+                                    }
+
+                                    return(
+                                        <div key={menuItem.label as string} onClick={onItemClick}>
+                                            <NavMenuItem
+                                                menuItem={menuItem}
+                                            />
+                                        </div>
+                                    )
+                                })}
+                        </Suspense>
+                    </NavList>
+                </Nav>
+            </PageSidebarBody>
+        </PageSidebar>
+    );
+};
+
+type NavMenuItemProps = {
+    menuItem: MenuItem;
+};
+
+function NavMenuItem({ menuItem }: NavMenuItemProps) {
+    const { t } = useTranslation();
+    const {
+        environment: { features }
+    } = useEnvironment<Environment>();
+    const { pathname } = useLocation();
+    const isActive = useMemo(
+        () => matchMenuItem(pathname, menuItem),
+        [pathname, menuItem]
+    );
+
+    if ("path" in menuItem) {
+        return (
+            <NavLink path={menuItem.path} isActive={isActive}>
+                {menuItem.icon}
+                {t(menuItem.label)}
+            </NavLink>
+        );
+    }
+
+    return (
+        <NavExpandable
+            data-testid={menuItem.label}
+            title={t(menuItem.label)}
+            isActive={isActive}
+            isExpanded={isActive}
+        >
+            {menuItem.children
+                .filter(menuItem =>
+                    menuItem.isVisible ? features[menuItem.isVisible] : true
+                )
+                .map(child => (
+                    <NavMenuItem key={child.label as string} menuItem={child} />
+                ))}
+        </NavExpandable>
+    );
+}
+
+function getFullUrl(path: string) {
+    return `${new URL(environment.baseUrl).pathname}${path}`;
+}
+
+function matchMenuItem(currentPath: string, menuItem: MenuItem): boolean {
+    if ("path" in menuItem) {
+        return !!matchPath(getFullUrl(menuItem.path), currentPath);
+    }
+
+    return menuItem.children.some(child => matchMenuItem(currentPath, child));
+}
+
+type NavLinkProps = {
+    path: string;
+    isActive: boolean;
+};
+
+export const NavLink = ({
+    path,
+    isActive,
+    children
+}: PropsWithChildren<NavLinkProps>) => {
+    const menuItemPath = getFullUrl(path) + location.search;
+    const href = useHref(menuItemPath);
+    const handleClick = useLinkClickHandler(menuItemPath);
+
+    return (
+        <NavItem
+            data-testid={path}
+            to={href}
+            isActive={isActive}
+            onClick={event =>
+                // PatternFly does not have the correct type for this event, so we need to cast it.
+                handleClick(event as unknown as ReactMouseEvent<HTMLAnchorElement>)
+            }
+        >
+            {children}
+        </NavItem>
+    );
+};
